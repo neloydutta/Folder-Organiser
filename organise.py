@@ -1,7 +1,7 @@
 #  *** Folder Organiser :D ***
 import os
-import magic
 import argparse
+import json
 import sqlite3
 
 type_map = {".mp3": "Music", ".MP3": "Music", ".m4a": "Music", ".mp4": "Videos", ".MP4": "Videos", ".avi": "Videos", ".doc": "Documents", ".docx": "Documents", ".pdf": "Documents", ".jpg": "Images", ".jpeg": "Images", ".JPG": "Images", ".JPEG": "Images",".html": "Codes"}
@@ -27,10 +27,6 @@ def organise():
     for filename in os.listdir(folder_location):
         filelocation = os.path.join(folder_location, filename)
         if os.path.isfile(filelocation):
-            try:
-                some_variable = magic.from_file(filelocation, mime=True)
-            except:
-                print("Magic Exception")
             file, ext = os.path.splitext(filename)
             if ext in type_map:
                 folder = type_map[ext]
@@ -73,6 +69,10 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--location", help="Location of Folder to be organised! '[-l|--location] <location>'", default="empty")
     parser.add_argument("-a", "--addtype", nargs=2, help="Add new unknown type! '[-a|--addtype] <.extension><space><type>'", default="empty")
     args = parser.parse_args()
+
+    with open('typemap.json') as json_data:
+        type_map = json.load(json_data)
+
     if args.addtype != "empty":
         fname = get_foldername(args.addtype[1])
         if fname == None:
@@ -88,3 +88,6 @@ if __name__ == "__main__":
             print("Invalid location!")
         else:
             organise()
+
+    with open('typemap.json', 'w') as outfile:
+        json.dump(type_map, outfile)
