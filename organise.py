@@ -3,7 +3,7 @@ import os
 import argparse
 import json
 
-type_map = {".mp3": "Music", ".MP3": "Music", ".m4a": "Music", ".mp4": "Videos", ".MP4": "Videos", ".avi": "Videos", ".doc": "Documents", ".docx": "Documents", ".pdf": "Documents", ".jpg": "Images", ".jpeg": "Images", ".JPG": "Images", ".JPEG": "Images",".html": "Codes"}
+type_map = {}
 
 folder_location = "empty"
 
@@ -77,6 +77,22 @@ def organise():
                 else:
                     break
 
+def update_typemap(ext, fname):
+    fname = get_foldername(fname)
+    if fname == None:
+        print("Invalid type mentioned! Here are valid types to choose from:\nMusic, Videos, Documents, Images, Compressed and Codes.")
+    else:
+        if not ext.startswith("."):
+            print("Invalid Extension!")
+        else:
+            if ext not in type_map.keys():
+                type_map[ext] = fname
+                print("Category of "+ext+" updated to "+fname)
+            elif ext in type_map.keys() and fname != type_map[ext]:
+                print("Category of "+ext+" updated from "+type_map[ext]+" to "+fname)
+            else:
+                print("Category of "+ext+" updated to "+fname)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='Folder Organiser')
@@ -88,20 +104,8 @@ if __name__ == "__main__":
         type_map = json.load(json_data)
 
     if args.addtype != "empty":
-        fname = get_foldername(args.addtype[1])
-        if fname == None:
-            print("Invalid type mentioned! Here are valid types to choose from:\nMusic, Videos, Documents, Images, Compressed and Codes.")
-        else:
-            if not args.addtype[0].startswith("."):
-                print("Invalid Extension!")
-            else:
-                if args.addtype[0] not in type_map.keys():
-                    type_map[args.addtype[0]] = fname
-                    print("Category of "+args.addtype[0]+" updated to "+fname)
-                elif args.addtype[0] in type_map.keys() and fname != type_map[args.addtype[0]]:
-                    print("Category of "+args.addtype[0]+" updated from "+type_map[args.addtype[0]]+" to "+fname)
-                else:
-                    print("Category of "+args.addtype[0]+" updated to "+fname)
+        update_typemap(args.addtype[0], args.addtype[1])
+
     if args.location != "empty":
         folder_location = args.location
         if not os.path.exists(folder_location):
