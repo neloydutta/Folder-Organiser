@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #  *** Folder Organiser :D ***
 import os
 import argparse
