@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {".m4a": "Music", ".mp4": "Videos", ".avi": "Videos", ".pdf": "Documents", ".xlsx": "Documents", ".doc": "Documents", ".JPEG": "Images", ".docx": "Documents", ".mp3": "Music", ".JPG": "Images", ".jpg": "Images", ".csv": "Documents", ".txt": "Documents", ".pptx": "Documents", ".html": "Codes", ".xls": "Documents", ".MP3": "Music", ".zip": "Compressed", ".jpeg": "Images", ".MP4": "Videos"}
+=======
+{".jpeg": "Images", ".m4a": "Music", ".avi": "Videos", ".doc": "Documents", ".MP3": "Music", ".JPG": "Images", ".jpg": "Images", ".mp3": "Music", ".txt": "Documents", ".html": "Codes", ".docx": "Documents", ".MP4": "Videos", ".pdf": "Documents", ".JPEG": "Images", ".mp4": "Videos"}
+>>>>>>> 04e899f314a0bb7ef975ed85b2f25a26cf04b019
